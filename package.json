@@ -6,12 +6,12 @@
     "type": "git",
     "url": "https://github.com/Oliv75/OriginJS.git"
   },
-  "keywords": {
+  "keywords": [
     "tracking",
     "analytics",
     "params",
     "sources"
-  },
+  ],
   "author": "Oliv75",
   "license": "MIT",
   "bugs": {
