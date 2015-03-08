@@ -1,6 +1,22 @@
 {
   "name": "originjs",
-  "version": "0.0.0",
+  "version": "0.1.0",
+  "main": "dist/originjs.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Oliv75/OriginJS.git"
+  },
+  "keywords": {
+    "tracking",
+    "analytics",
+    "params",
+    "sources"
+  },
+  "author": "Oliv75",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Oliv75/OriginJS/issues"
+  },
   "dependencies": {},
   "devDependencies" : {
     "mocha" : "*",

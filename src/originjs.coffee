@@ -1,65 +1,75 @@
 Origin = undefined
-LaunchOrigin = undefined
 root = undefined
+
 Origin = ->
+  searchValue = undefined
+  self = undefined
+  _gclid = undefined
+  _utmz = undefined
+  cookieExist = undefined
+
   searchValue = (l, n, s) ->
-    return "-"  if not l or l is "" or not n or n is "" or not s or s is ""
+    c = undefined
     i = undefined
     i2 = undefined
     i3 = undefined
-    c = "-"
+    if !l or l == '' or !n or n == '' or !s or s == ''
+      return '-'
+    c = '-'
     i = l.indexOf(n)
-    i3 = n.indexOf("=") + 1
+    i3 = n.indexOf('=') + 1
     if i > -1
       i2 = l.indexOf(s, i)
-      i2 = l.length  if i2 < 0
-      c = l.substring((i + i3), i2)
+      if i2 < 0
+        i2 = l.length
+      c = l.substring(i + i3, i2)
     c
 
   self = this
-  _utmz = searchValue(document.cookie, "__utmz=", ";")
-  _gclid = searchValue(_utmz, "utmgclid=", "|")
-  findSource: ->
-    unless _gclid is "-"
-      "google"
-    else
-      searchValue _utmz, "utmcsr=", "|"
+  _utmz = searchValue(document.cookie, '__utmz=', ';')
+  _gclid = searchValue(_utmz, 'utmgclid=', '|')
 
-  findMedium: ->
-    unless _gclid is "-"
-      "cpc"
-    else
-      searchValue _utmz, "utmcmd=", "|"
-
-  findContent: ->
-    searchValue _utmz, "utmcct=", "|"
-
-  findCampaign: ->
-    searchValue _utmz, "utmccn=", "|"
-
-  findTerm: ->
-    searchValue _utmz, "utmctr=", "|"
-
-LaunchOrigin = (fn) ->
-  self = this
   cookieExist = ->
-    index = document.cookie.indexOf("; __utmz=")
-    index isnt -1
+    index = undefined
+    index = document.cookie.indexOf('; __utmz=')
+    index != -1
 
-  constructor = (fn) ->
+  self.initialize = ->
     if cookieExist()
-      origin = new Origin()
-      fn origin
+      return {
+        getSource: ->
+          if _gclid != '-'
+            'google'
+          else
+            searchValue _utmz, 'utmcsr=', '|'
+        getMedium: ->
+          if _gclid != '-'
+            'cpc'
+          else
+            searchValue _utmz, 'utmcmd=', '|'
+        getContent: ->
+          searchValue _utmz, 'utmcct=', '|'
+        getCampaign: ->
+          searchValue _utmz, 'utmccn=', '|'
+        getTerm: ->
+          searchValue _utmz, 'utmctr=', '|'
+        getParams: ->
+          params = window.location.search
+          if params.length > 0
+            JSON.parse '{"' + decodeURIComponent(params).slice(1).split('=').join('":"').split('&').join('","') + '"}'
+          else
+            {}
+
+      }
     else
       setTimeout (->
-        self.constructor fn
+        self.initialize()
         return
       ), 500
     return
 
-  constructor.apply self, arguments_
-  return
+  self.initialize.apply self, arguments
 
-root = (if typeof exports isnt "undefined" and exports isnt null then exports else window)
+root = if typeof exports != 'undefined' and exports != null then exports else window
 root.$Origin = Origin
-root.$LaunchOrigin = LaunchOrigin
+return
