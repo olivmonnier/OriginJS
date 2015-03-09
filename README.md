@@ -4,12 +4,13 @@ Help to track visitors
 * google analytics installed
 
 ## Getting started
+From bower
 ```javascript
-bower install originjs
+bower install originjs --save
 ```
-or
+From npm
 ```javascript
-npm install originjs
+npm install originjs --save
 ```
 ## How it works
 ```javascript
