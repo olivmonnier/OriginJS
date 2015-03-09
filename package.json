@@ -1,6 +1,7 @@
 {
   "name": "originjs",
-  "version": "0.1.0",
+  "description": "Help to track visitors",
+  "version": "0.1.1",
   "main": "dist/originjs.js",
   "repository": {
     "type": "git",
