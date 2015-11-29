@@ -3,6 +3,11 @@
   "description": "Help to track visitors",
   "version": "0.1.1",
   "main": "dist/originjs.js",
+  "scripts": {
+    "browserify": "browserify src/originjs.js > dist/originjs.js",
+    "uglify": "uglifyjs dist/originjs.js -o dist/originjs.min.js",
+    "dist": "npm run browserify && npm run uglify"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Oliv75/OriginJS.git"
@@ -19,14 +24,27 @@
     "url": "https://github.com/Oliv75/OriginJS/issues"
   },
   "dependencies": {},
-  "devDependencies" : {
-    "mocha" : "*",
-    "chai" : "*",
-    "sinon" : "*",
-    "grunt" : "*",
-    "grunt-contrib-coffee": "*",
-    "grunt-contrib-uglify": "*",
-    "matchdep": "*",
-    "grunt-mocha-test": "*"
+  "devDependencies": {
+    "babel": "^6.1.18",
+    "babel-preset-es2015": "^6.1.18",
+    "babelify": "^7.2.0",
+    "browser-sync": "^2.10.0",
+    "browserify": "^12.0.1",
+    "chai": "*",
+    "mocha": "*",
+    "sinon": "*",
+    "uglify-js": "^2.6.1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
   }
 }
