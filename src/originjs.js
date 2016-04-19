@@ -30,6 +30,7 @@ function getSource () {
 function getMedium () {
   if (document.referrer.search('https?://(.*)(google|bing|yahoo|daum|eniro|naver|msn|aol|lycos|ask|altavista|netscape|cnn|about|mamma|alltheweb|voila|virgilio|baidu|alice|yandex|najdi|mamma|seznam|search|wp|onetcenter|szukacz|yam|pchome|kvasir|ozu|terra|mynet|ekolay|rambler).([^/?]*)') === 0) {
     return 'organic';
+  } else if (document.referrer.search('https?://(.*)(facebook|twitter|linkedin).([^/?]*)') === 0 || ) {
     return 'social';
   } else {
     return 'referal';
