@@ -8,10 +8,51 @@ function getParams() {
   return params.length > 0 ? JSON.parse('{"' + decompose + '"}') : {};
 };
 
-var Originjs = {
-  getParams: getParams
+function getBrowserLang() {
+  return window.navigator.lang;
 };
 
-module.exports = Originjs;
+function getSource() {
+  if (document.referrer.search('https?://(.*)google.([^/?]*)') === 0) {
+    return 'Google';
+  } else if (document.referrer.search('https?://(.*)bing.([^/?]*)') === 0) {
+    return 'Bing';
+  } else if (document.referrer.search('https?://(.*)yahoo.([^/?]*)') === 0) {
+    return 'Yahoo';
+  } else if (document.referrer.search('https?://(.*)facebook.([^/?]*)') === 0) {
+    return 'Facebook';
+  } else if (document.referrer.search('https?://(.*)twitter.([^/?]*)') === 0) {
+    return 'Twitter';
+  } else if (document.referrer.search('https?://(.*)linkedin.([^/?]*)') === 0) {
+    return 'Linkedin';
+  } else {
+    return 'Other';
+  }
+};
+
+function getMedium() {
+  if (document.referrer.search('https?://(.*)(google|bing|yahoo|daum|eniro|naver|msn|aol|lycos|ask|altavista|netscape|cnn|about|mamma|alltheweb|voila|virgilio|baidu|alice|yandex|najdi|mamma|seznam|search|wp|onetcenter|szukacz|yam|pchome|kvasir|ozu|terra|mynet|ekolay|rambler).([^/?]*)') === 0) {
+    return 'organic';
+  } else if (document.referrer.search('https?://(.*)(facebook|twitter|linkedin).([^/?]*)') === 0) {
+    return 'social';
+  } else {
+    return 'referal';
+  }
+}
+
+function getWindowSize() {
+  return {
+    height: window.innerHeight,
+    width: window.innerWidth
+  };
+}
+
+module.exports = {
+  getBrowserLang: getBrowserLang,
+  getMedium: getMedium,
+  getParams: getParams,
+  getSource: getSource,
+  getWindowSize: getWindowSize
+};
 
 },{}]},{},[1]);
