@@ -1,8 +1,8 @@
-function getBrowserLang () {
+exports.getBrowserLang = function () {
   return window.navigator.lang;
 };
 
-function getMedium () {
+exports.getMedium = function () {
   if (document.referrer.search('https?://(.*)(google|bing|yahoo|daum|eniro|naver|msn|aol|lycos|ask|altavista|netscape|cnn|about|mamma|alltheweb|voila|virgilio|baidu|alice|yandex|najdi|mamma|seznam|search|wp|onetcenter|szukacz|yam|pchome|kvasir|ozu|terra|mynet|ekolay|rambler).([^/?]*)') === 0) {
     return 'organic';
   } else if (document.referrer.search('https?://(.*)(facebook|twitter|linkedin).([^/?]*)') === 0) {
@@ -12,8 +12,8 @@ function getMedium () {
   }
 }
 
-function getNavigator () {
-  var sBrowser, sUsrAg = navigator.userAgent;
+exports.getNavigator = function () {
+  let sBrowser, sUsrAg = navigator.userAgent;
 
   if(sUsrAg.indexOf("Chrome") > -1) {
     sBrowser = "Google Chrome";
@@ -30,14 +30,14 @@ function getNavigator () {
   return sBrowser;
 }
 
-function getParams () {
+exports.getParams = function () {
   const decompose = decodeURIComponent(params).slice(1).split('=').join('":"').split('&').join('","');
   const params = window.location.search;
 
   return (params.length > 0) ? JSON.parse(`{"${decompose}"}`) : {};
 };
 
-function getSource () {
+exports.getSource = function () {
   if (document.referrer.search('https?://(.*)google.([^/?]*)') === 0) {
     return 'Google';
   } else if (document.referrer.search('https?://(.*)bing.([^/?]*)') === 0) {
@@ -55,18 +55,9 @@ function getSource () {
   }
 };
 
-function getWindowSize () {
+exports.getWindowSize = function () {
   return {
     height: window.innerHeight,
     width: window.innerWidth
   }
 }
-
-module.exports = {
-  getBrowserLang,
-  getMedium,
-  getNavigator,
-  getParams,
-  getSource,
-  getWindowSize
-};
