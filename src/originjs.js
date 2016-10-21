@@ -31,8 +31,8 @@ exports.getNavigator = function () {
 }
 
 exports.getParams = function () {
-  const decompose = decodeURIComponent(params).slice(1).split('=').join('":"').split('&').join('","');
   const params = window.location.search;
+  const decompose = decodeURIComponent(params).slice(1).split('=').join('":"').split('&').join('","');
 
   return (params.length > 0) ? JSON.parse(`{"${decompose}"}`) : {};
 };
